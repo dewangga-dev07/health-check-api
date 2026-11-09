@@ -1,0 +1,21 @@
+services:
+  web:
+    image: health-check-api
+    ports:
+      - "5000:5000"
+
+    networks:
+      - jaringan-dewa
+
+  redis:
+    image: redis
+    volumes:
+      - data-redis:/data
+    networks:
+      - jaringan-dewa
+
+networks:
+  jaringan-dewa:
+
+volumes:
+  data-redis:
