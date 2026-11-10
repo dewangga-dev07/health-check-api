@@ -1,0 +1,25 @@
+name: CI Testing
+
+on:
+  push:
+    branches: ["main"]
+job:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ambil code dari repo
+        uses: actions/checkout@v4
+
+      - name: siapin python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+
+      - name: install library
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: cek code eror atau engga
+        run: python -c "import app"
