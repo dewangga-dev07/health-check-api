@@ -35,4 +35,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: dewadevops/health-check-api
+          tags: |
+            dewadevops/health-check-api:v1
+            dewadevops/health-check-api:latest
