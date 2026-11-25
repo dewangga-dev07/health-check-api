@@ -1,0 +1,28 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            mkdir -p ${{ secrets.VPS_TARGET_DIR }}
+            cd ${{ secrets.VPS_TARGET_DIR }}
+            if [ ! -d ".git" ]; then
+              git clone https://github.com/dewangga-dev07/health-check-api.git .
+            fi
+            git pull origin main
+            docker compose up -d --build
