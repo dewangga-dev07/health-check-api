@@ -1,14 +1,16 @@
 services:
   web:
-    image: health-check-api
+    build: .
     ports:
       - "5000:5000"
 
     networks:
       - jaringan-dewa
+    depends_on:
+      - redis
 
   redis:
-    image: redis
+    image: redis:alpine
     volumes:
       - data-redis:/data
     networks:
