@@ -15,3 +15,7 @@ def visit():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+
+@app.route("/info")
+def info():
+	return{"nama": "Dewangga Putra Wibawa", "status": "Siswa SMKN 2 Yogyakarta" }
